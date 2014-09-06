@@ -10,6 +10,11 @@ gem 'omniauth-twitter'
 gem 'omniauth-linkedin'
 
 gem 'figaro'
+gem 'haml'
+gem 'haml-rails'
+gem 'foundation-rails'
+gem 'simple_form'
+gem 'html2haml'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
