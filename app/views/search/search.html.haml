@@ -1,0 +1,11 @@
+= form_tag search_path, method: :get do
+  = text_field_tag :q, params[:q]
+  = submit_tag "Go!", name: nil
+
+
+- unless @books.blank?
+  %ul
+    - @books.each do |book|
+      %li
+        %h3
+          = link_to book.title, controller: "books", action: "show", id: book._id
