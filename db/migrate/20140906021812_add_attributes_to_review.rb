@@ -1,0 +1,7 @@
+class AddAttributesToReview < ActiveRecord::Migration
+  def change
+    add_column :reviews, :rating, :integer
+    add_column :reviews, :book_id, :integer
+    add_column :reviews, :user_id, :integer
+  end
+end
