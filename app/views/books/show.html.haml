@@ -1,0 +1,15 @@
+%p
+  %b Name:
+  = @book.name
+
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Back', books_path
+
+- if user_signed_in?
+  = simple_form_for([@book, @new_review]) do |f|
+    = f.input :title
+    = f.input :content
+    = f.input :rating
+    = f.input :book_id, as: :hidden
+    = f.submit
