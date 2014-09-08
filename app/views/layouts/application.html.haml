@@ -8,6 +8,21 @@
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   %body
-    = debug current_user
-    = yield
+    .row
+      .medium-8.columns
+        %p#notice= notice
+        %p#alert= alert
+
+    .row
+      .medium-8.columns
+        - if user_signed_in?
+          = "Helllo + #{current_user.email}"
+          = link_to "Log out", destroy_user_session_path, method: :delete
+        - else
+          = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+          = link_to "Log in", new_user_session_path
+          = link_to "Sign up", new_user_registration_path
+
+      = yield
+
     = javascript_include_tag "application"
