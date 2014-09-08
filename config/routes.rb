@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  # Search
+  get 'search', to: 'search#search'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
