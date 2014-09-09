@@ -2,10 +2,14 @@
   = text_field_tag :q, params[:q]
   = submit_tag "Go!", name: nil
 
-
-- unless @books.blank?
-  %ul
-    - @books.each do |book|
-      %li
-        %h3
-          = link_to book.title, controller: "books", action: "show", id: book._id
+%ul
+  - @books.each do |book|
+    %li
+      %h5
+        = link_to (book.try(:highlight).try(:title) ? book.highlight.title[0].html_safe : book.title), controller: "books", action: "show", id: book._id
+        by
+        = book.try(:highlight).try(:author) ? book.highlight.author[0].html_safe : book.author
+      - if book.try(:highlight).try(:content)
+        - book.highlight.content.each do |snippet|
+          %p
+            = snippet.html_safe

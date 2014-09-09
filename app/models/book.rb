@@ -18,6 +18,30 @@ class Book < ActiveRecord::Base
 
   has_many :reviews
 
+
+  def self.search(query)
+    __elasticsearch__.search(
+      {
+        query: {
+          multi_match: {
+            query: query,
+            fields: ['title^6', 'author^5', 'content']
+          }
+        },
+        highlight: {
+          pre_tags: ['<em><strong>'],
+          post_tags: ['</em></strong>'],
+          fields: {
+            title: {},
+            author: {},
+            content: {}
+          }
+        }
+      }
+    )
+  end
+
 end
 
-Book.import # for auto sync model with elastic search
+# Index all book records from the DB to Elasticsearch
+Book.import
