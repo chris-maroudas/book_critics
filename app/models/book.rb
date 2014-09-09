@@ -3,9 +3,11 @@
 # Table name: books
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  title      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  content    :text
+#  author     :string(255)
 #
 
 require 'elasticsearch/model'
