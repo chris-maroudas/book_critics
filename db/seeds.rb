@@ -6,8 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Author.create(first_name: "Christos", last_name: "Maroudas")
 
 400.times do
-  stats = { author: Faker::Name.name, title: Faker::Lorem.sentence(3), content: Faker::Lorem.paragraph(5) }
+  stats = { author: Author.first, title: Faker::Lorem.sentence(3), content: Faker::Lorem.paragraph(5) }
   Book.create(stats)
 end
