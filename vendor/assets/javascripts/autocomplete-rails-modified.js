@@ -94,7 +94,7 @@
         search: function() {
           // custom minLength
           var term = extractLast( this.value );
-          if ( term.length < 5 ) {
+          if ( term.length < 6 ) {
             return false;
           }
         },
