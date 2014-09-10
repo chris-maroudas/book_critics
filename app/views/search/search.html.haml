@@ -8,4 +8,4 @@
   - @books.each do |book|
     %li
       %h5
-        = link_to (book.try(:highlight).try(:searchable_terms) ? book.highlight.searchable_terms[0].html_safe : book.searchable_terms), controller: "books", action: "show", id: book._id
+        = link_to (book.try(:highlight).try(:searchable_terms) ? book.highlight.searchable_terms[0].html_safe : book.searchable_terms), controller: "books", action: "show", id: book.slug

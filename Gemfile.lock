@@ -31,6 +31,7 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
+    babosa (0.3.11)
     bcrypt (3.1.7)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -81,6 +82,8 @@ GEM
     foundation-rails (5.4.3.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    friendly_id (5.0.4)
+      activerecord (>= 4.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -228,6 +231,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  babosa
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
@@ -237,6 +241,7 @@ DEPENDENCIES
   faker
   figaro
   foundation-rails
+  friendly_id
   haml
   haml-rails
   html2haml

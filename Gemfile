@@ -29,6 +29,8 @@ gem 'faker'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+gem 'friendly_id'
+gem 'babosa'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record

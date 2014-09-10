@@ -12,17 +12,30 @@
 #
 
 require 'elasticsearch/model'
+require 'babosa'
 
 class Book < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :author
   has_many :reviews
 
-  validates :user_id, presence: true
+  validates :author_id, presence: true
 
   before_save :add_searchable_terms
+
+
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize(transliterations: :greek).to_s
+  end
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 
   def add_searchable_terms
     self.searchable_terms = "#{title}, #{author.first_name} #{author.last_name}"
