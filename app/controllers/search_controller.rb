@@ -7,4 +7,5 @@ class SearchController < ApplicationController
       @books = Book.search(params[:q])
     end
   end
+
 end
