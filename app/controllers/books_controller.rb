@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
+  autocomplete :book, :searchable_terms, :full => true
+
   # GET /books
   # GET /books.json
   def index

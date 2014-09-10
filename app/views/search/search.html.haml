@@ -1,15 +1,11 @@
 = form_tag search_path, method: :get do
-  = text_field_tag :q, params[:q]
+  = autocomplete_field_tag 'q', '', autocomplete_book_searchable_terms_books_path, :size => 75
   = submit_tag "Go!", name: nil
 
+
 %ul
+  = @books.count
   - @books.each do |book|
     %li
       %h5
-        = link_to (book.try(:highlight).try(:title) ? book.highlight.title[0].html_safe : book.title), controller: "books", action: "show", id: book._id
-        by
-        = book.try(:highlight).try(:author) ? book.highlight.author[0].html_safe : book.author
-      - if book.try(:highlight).try(:content)
-        - book.highlight.content.each do |snippet|
-          %p
-            = snippet.html_safe
+        = link_to (book.try(:highlight).try(:searchable_terms) ? book.highlight.searchable_terms[0].html_safe : book.searchable_terms), controller: "books", action: "show", id: book._id

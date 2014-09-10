@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :books do
     resources :reviews
+    get :autocomplete_book_searchable_terms, :on => :collection
   end
 
   # Search
