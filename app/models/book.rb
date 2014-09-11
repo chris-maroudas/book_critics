@@ -9,6 +9,7 @@
 #  content          :text
 #  author_id        :integer
 #  searchable_terms :string(255)
+#  slug             :string(255)
 #
 
 require 'elasticsearch/model'
@@ -20,6 +21,9 @@ class Book < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  # TODO:  Acts as taggable
+  # TODO: Counter cache to books-authors
 
   belongs_to :author
   has_many :reviews
@@ -63,5 +67,5 @@ class Book < ActiveRecord::Base
 
 end
 
-# Index all book records from the DB to Elasticsearch
+# Index all book  from the DB to Elasticsearch
 Book.import
