@@ -7,12 +7,14 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @popular_tags = ActsAsTaggableOn::Tag.most_used
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
     @new_review = @book.reviews.new
+    @related_books = @book.find_related_tags
   end
 
   # GET /books/new

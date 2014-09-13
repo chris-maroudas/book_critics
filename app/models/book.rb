@@ -22,7 +22,8 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  # TODO:  Acts as taggable
+  # TODO:  Add skroutz API and get lower price
+  # TODO Add image and carrierwave
   acts_as_taggable
   # TODO: Counter cache to books-authors
 

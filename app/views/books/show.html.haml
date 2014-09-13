@@ -2,6 +2,14 @@
   %b Title
   = @book.title
 
+  %b Tags
+  - @book.tags.each do |tag|
+    = tag.name
+
+%h3 Related books!
+- @related_books.each do |book|
+  = book.title
+
 = link_to 'Edit', edit_book_path(@book)
 \|
 = link_to 'Back', books_path
