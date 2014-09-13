@@ -15,6 +15,8 @@ gem 'haml-rails'
 gem 'foundation-rails'
 gem 'simple_form'
 gem 'html2haml'
+gem 'truncate_html'
+gem 'acts-as-taggable-on'
 
 gem 'pry'
 gem 'pry-rails'
@@ -24,7 +26,9 @@ gem 'thin'
 gem 'quiet_assets'
 gem 'rails-footnotes'
 gem 'annotate'
+gem 'awesome_print'
 gem 'faker'
+
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
