@@ -23,6 +23,7 @@ class Book < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   # TODO:  Acts as taggable
+  acts_as_taggable
   # TODO: Counter cache to books-authors
 
   belongs_to :author
@@ -32,6 +33,17 @@ class Book < ActiveRecord::Base
 
   before_save :add_searchable_terms
 
+  def list_of_tags
+    tag_list
+  end
+
+  def list_of_tags=(string)
+    self.tag_list = string.downcase
+  end
+
+  def average_rating
+    reviews.pluck(:rating).sum.to_f / reviews.count
+  end
 
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize(transliterations: :greek).to_s

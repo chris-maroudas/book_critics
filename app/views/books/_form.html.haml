@@ -2,7 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
+    = f.input :title
+    = f.input :list_of_tags, label: "Tags separated by commas"
+    = f.association :author
 
   .form-actions
     = f.button :submit

@@ -64,6 +64,11 @@ class BooksController < ApplicationController
     end
   end
 
+  def tags
+    @books = (params[:tag].blank? || params[:tag] == "all") ? Book.all : Book.tagged_with(params[:tag])
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -72,6 +77,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:name)
+      params.require(:book).permit(:title, :list_of_tags, :author_id)
     end
 end
