@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  mount Peek::Railtie => '/peek'
+
   resources :tags, only: [:show, :index]
+
 
   resources :books do
     resources :reviews

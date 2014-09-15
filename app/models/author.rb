@@ -12,9 +12,11 @@
 #
 
 class Author < ActiveRecord::Base
-  has_many :books
+
+  has_many :books, dependent: :destroy
 
   # TODO: Add friendly_id
+  # TODO: Add image with carrierwave
 
   def to_s
     "#{first_name} #{last_name}"

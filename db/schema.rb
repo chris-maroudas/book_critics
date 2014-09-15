@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913000955) do
+ActiveRecord::Schema.define(version: 20140915000856) do
 
   create_table "authors", force: true do |t|
     t.string   "first_name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140913000955) do
     t.integer  "author_id"
     t.string   "searchable_terms"
     t.string   "slug"
+    t.float    "average_rating"
   end
 
   create_table "friendly_id_slugs", force: true do |t|

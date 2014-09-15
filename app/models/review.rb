@@ -15,6 +15,15 @@
 class Review < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :review
+  belongs_to :book
+
+  validates :book_id, presence: true
+
+  after_save :recalculate_books_avg_rating
+  after_destroy :recalculate_books_avg_rating
+
+  def recalculate_books_avg_rating
+    book.calculate_average_rating
+  end
 
 end

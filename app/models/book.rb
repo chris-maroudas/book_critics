@@ -23,16 +23,39 @@ class Book < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   # TODO:  Add skroutz API and get lower price
-  # TODO Add image and carrierwave
-  acts_as_taggable
+  # TODO: Add image and carrierwave
+  # TODO: Active admin from Sitepoint
+  # TODO: Add breacrumbs with Gretel
+  # TODO: Add Smart listing  gem
+  # TODO: Add pagination
   # TODO: Counter cache to books-authors
+  # TODO: A normal user should apply to create an author
+  # TODO: Should Accept nested attributes when an author doesn't exist
+  # OPTIMIZE: Average rating to be stored in a DB field and be updated once a new review is posted
+
+  acts_as_taggable
 
   belongs_to :author
-  has_many :reviews
+
+  has_many :reviews, dependent: :destroy
 
   validates :author_id, presence: true
 
   before_save :add_searchable_terms
+
+
+  def self.reviewed
+    all.select{ |book| book.reviews.present? }
+  end
+
+  def calculate_average_rating
+    self.average_rating = (reviews.pluck(:rating).sum.to_f / reviews.count).round(2)
+    save
+  end
+
+  def self.highest_rated
+
+  end
 
   def list_of_tags
     tag_list
@@ -40,10 +63,6 @@ class Book < ActiveRecord::Base
 
   def list_of_tags=(string)
     self.tag_list = string.downcase
-  end
-
-  def average_rating
-    reviews.pluck(:rating).sum.to_f / reviews.count
   end
 
   def normalize_friendly_id(input)
