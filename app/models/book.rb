@@ -2,14 +2,18 @@
 #
 # Table name: books
 #
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
-#  content          :text
-#  author_id        :integer
-#  searchable_terms :string(255)
-#  slug             :string(255)
+#  id                     :integer          not null, primary key
+#  title                  :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  content                :text
+#  author_id              :integer
+#  searchable_terms       :string(255)
+#  slug                   :string(255)
+#  average_rating         :float
+#  reviews_count          :integer
+#  approved               :boolean          default(FALSE)
+#  approved_reviews_count :integer
 #
 
 require 'elasticsearch/model'
@@ -45,17 +49,23 @@ class Book < ActiveRecord::Base
 
   scope :approved, -> { where(approved: true) }
 
-  def self.reviewed
-    all.select{ |book| book.reviews.approved.present? }
+  scope :reviewed, -> do
+    includes(:reviews).where.not(reviews: { approved: false })
+  end
+
+  scope :highest_rated, -> { reviewed.order("average_rating DESC") }
+
+  def reviewed?
+    reviews.approved.present?
+  end
+
+  def approved_reviews
+    reviews.approved
   end
 
   def calculate_average_rating
     self.average_rating = (reviews.approved.pluck(:rating).sum.to_f / reviews.approved.count).round(2)
     save
-  end
-
-  def self.highest_rated
-
   end
 
   def list_of_tags

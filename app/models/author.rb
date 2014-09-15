@@ -9,6 +9,7 @@
 #  bio        :text
 #  created_at :datetime
 #  updated_at :datetime
+#  approved   :boolean          default(FALSE)
 #
 
 class Author < ActiveRecord::Base

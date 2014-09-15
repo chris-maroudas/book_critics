@@ -10,6 +10,7 @@
 #  rating     :integer
 #  book_id    :integer
 #  user_id    :integer
+#  approved   :boolean          default(FALSE)
 #
 
 class Review < ActiveRecord::Base
@@ -30,7 +31,7 @@ class Review < ActiveRecord::Base
 
   def update_books_approved_reviews_count
     self.book.approved_reviews_count = book.reviews.approved.count
-    self.book.save
+    book.save
   end
 
 

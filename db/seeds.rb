@@ -12,11 +12,11 @@
 end
 
 100.times do
-  stats = { author: Author.all.sample, title: Faker::Hacker.say_something_smart, content: Faker::Lorem.paragraph(5) }
+  stats = { author: Author.all.sample, title: Faker::Hacker.say_something_smart, content: Faker::Lorem.paragraph(5), approved: true }
   Book.create(stats)
 end
 
 500.times do
-  stats = { title: Faker::Hacker.say_something_smart, book: Book.all.sample, rating: rand(1..5) }
+  stats = { title: Faker::Hacker.say_something_smart, book: Book.all.sample, rating: rand(1..5), approved: true }
   Review.create(stats)
 end
