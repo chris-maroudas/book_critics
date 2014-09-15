@@ -28,6 +28,10 @@ gem 'rails-footnotes'
 gem 'annotate'
 gem 'awesome_print'
 gem 'faker'
+gem 'peek'
+gem 'peek-performance_bar'
+gem 'peek-sidekiq'
+gem 'peek-redis'
 
 
 gem 'elasticsearch-model'
