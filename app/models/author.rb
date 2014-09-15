@@ -18,6 +18,8 @@ class Author < ActiveRecord::Base
   # TODO: Add friendly_id
   # TODO: Add image with carrierwave
 
+  scope :approved, -> { where(approved: true) }
+
   def to_s
     "#{first_name} #{last_name}"
   end

@@ -16,7 +16,7 @@ end
   Book.create(stats)
 end
 
-5000.times do
+500.times do
   stats = { title: Faker::Hacker.say_something_smart, book: Book.all.sample, rating: rand(1..5) }
   Review.create(stats)
 end

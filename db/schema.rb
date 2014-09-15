@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915000856) do
+ActiveRecord::Schema.define(version: 20140915023633) do
 
   create_table "authors", force: true do |t|
     t.string   "first_name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140915000856) do
     t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "approved",   default: false
   end
 
   create_table "books", force: true do |t|
@@ -31,6 +32,9 @@ ActiveRecord::Schema.define(version: 20140915000856) do
     t.string   "searchable_terms"
     t.string   "slug"
     t.float    "average_rating"
+    t.integer  "reviews_count"
+    t.boolean  "approved",               default: false
+    t.integer  "approved_reviews_count"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -54,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140915000856) do
     t.integer  "rating"
     t.integer  "book_id"
     t.integer  "user_id"
+    t.boolean  "approved",   default: false
   end
 
   create_table "taggings", force: true do |t|
