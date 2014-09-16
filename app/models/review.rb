@@ -19,6 +19,7 @@ class Review < ActiveRecord::Base
   belongs_to :book, counter_cache: true
 
   validates :book_id, presence: true
+  # TODO: Add unique validation to user_id, scope: book_id
 
   scope :approved, -> { where(approved: true) }
 
@@ -29,6 +30,7 @@ class Review < ActiveRecord::Base
     book.calculate_average_rating
   end
 
+  # Update custom counter cache
   def update_books_approved_reviews_count
     self.book.approved_reviews_count = book.reviews.approved.count
     book.save
