@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+# CSV Import
+# require 'csv'
+# CSV.foreach(Rails.root.join("db/seeds_data/movies.csv"), headers: true) do |row|
+#   Movie.find_or_create_by(title: row[0], release_year: row[1], price: row[2], description: row[3], imdb_id: row[4], poster_url: row[5])
+# end
+
 20.times do
   stats = { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name }
   Author.create(stats)
