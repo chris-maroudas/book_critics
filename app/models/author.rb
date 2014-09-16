@@ -21,12 +21,10 @@ class Author < ActiveRecord::Base
 
   scope :approved, -> { where(approved: true) }
 
-  def to_s
-    "#{first_name} #{last_name}"
-  end
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
+  alias :to_s :full_name
 end
