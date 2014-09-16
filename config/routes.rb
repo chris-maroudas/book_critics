@@ -1,6 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
-  mount Peek::Railtie => '/peek'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :tags, only: [:show, :index]
 

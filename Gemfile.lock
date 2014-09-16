@@ -33,7 +33,6 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
-    atomic (1.1.16)
     awesome_print (1.2.0)
     babosa (0.3.11)
     bcrypt (3.1.7)
@@ -152,19 +151,7 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
-    peek (0.1.9)
-      atomic (>= 1.0.0)
-      railties (>= 3.0.0)
-    peek-performance_bar (1.1.6)
-      peek (>= 0.1.0)
-    peek-redis (1.1.0)
-      atomic (>= 1.0.0)
-      peek
-      redis
-    peek-sidekiq (1.0.3)
-      atomic (>= 1.0.0)
-      peek
-      sidekiq
+    pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -175,6 +162,8 @@ GEM
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.5)
@@ -223,6 +212,10 @@ GEM
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
     spring (1.1.3)
     sprockets (2.11.0)
@@ -285,10 +278,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-linkedin
   omniauth-twitter
-  peek
-  peek-performance_bar
-  peek-redis
-  peek-sidekiq
+  pg
   pry
   pry-rails
   quiet_assets
@@ -297,7 +287,9 @@ DEPENDENCIES
   rails4-autocomplete
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  sidekiq
   simple_form
+  sinatra
   spring
   sqlite3
   thin

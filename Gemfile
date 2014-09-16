@@ -28,11 +28,7 @@ gem 'rails-footnotes'
 gem 'annotate'
 gem 'awesome_print'
 gem 'faker'
-gem 'peek'
-gem 'peek-performance_bar'
-gem 'peek-sidekiq'
-gem 'peek-redis'
-
+gem 'sinatra'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -40,10 +36,16 @@ gem 'elasticsearch-rails'
 gem 'friendly_id'
 gem 'babosa'
 
+gem 'sidekiq'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
+
+# FIXME: Change other enviroments to use this DB
+gem 'sqlite3', group: [:test, :production]
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
