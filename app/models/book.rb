@@ -49,7 +49,7 @@ class Book < ActiveRecord::Base
   validates :author_id, presence: true
 
   # Callbacks
-  before_save :add_searchable_terms
+  before_create :add_searchable_terms
 
   # Scopes
   scope :approved, -> { where(approved: true) }
@@ -99,7 +99,9 @@ class Book < ActiveRecord::Base
 
   # Autocomplete and elastic search field
   def add_searchable_terms
-    self.searchable_terms = "#{title}, #{author.first_name} #{author.last_name}"
+    unless author.blank?
+      self.searchable_terms ||= "#{title}, #{author.first_name} #{author.last_name}"
+    end
   end
 
   # Elastic Search customization
