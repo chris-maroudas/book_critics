@@ -1,0 +1,28 @@
+body {
+	color: #444;
+	font-family: Georgia;
+}
+li {
+	font-family: 'Noto serif';
+}
+
+#search-bar {
+	width: 350px;
+	float: left;
+}
+
+#search-submit-tag {
+	width: 30px;
+	float: right;
+}
+
+.book-mashup, .book-preview {
+	&:last-child {
+		float: left !important;
+	}
+}
+
+a.description {
+	font-family: "Noto serif";
+	display: block;
+}
