@@ -27,13 +27,15 @@ class Review < ActiveRecord::Base
   after_destroy :recalculate_books_avg_rating, :update_books_approved_reviews_count
 
   def recalculate_books_avg_rating
-    book.calculate_average_rating
+    book.delay.calculate_average_rating unless book.blank?
   end
 
   # Update custom counter cache
   def update_books_approved_reviews_count
-    self.book.approved_reviews_count = book.reviews.approved.count
-    book.save
+    unless book.blank?
+      self.book.approved_reviews_count = book.reviews.approved.count
+      book.save
+    end
   end
 
 
