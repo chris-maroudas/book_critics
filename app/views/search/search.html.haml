@@ -1,11 +1,15 @@
-= form_tag search_path, method: :get do
-  = autocomplete_field_tag 'q', '', autocomplete_book_searchable_terms_books_path, :size => 75
-  = submit_tag "Go!", name: nil
+.row
+  .large-12.columns
+    .row.book-mashup
 
-
-%ul
-  = @books.count
-  - @books.each do |book|
-    %li
-      %h5
-        = link_to (book.try(:highlight).try(:searchable_terms) ? book.highlight.searchable_terms[0].html_safe : book.searchable_terms), controller: "books", action: "show", id: book.slug
+      - @books.each do |book|
+        .row
+          .large-4.small-6.columns.book-preview
+            = link_to book do
+              %img{:src => "http://placehold.it/250x250&text=Thumbnail"}/
+          .large-6.small-12.columns.book-preview
+            = link_to book.title, book, class: "description"
+            by:
+            = book.author.full_name
+            , Rating:
+            = book.average_rating

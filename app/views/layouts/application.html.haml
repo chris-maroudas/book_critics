@@ -7,6 +7,8 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
+
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic&subset=latin,greek' rel='stylesheet' type='text/css'>
   %body
     .row
       = render 'peek/bar'
@@ -23,7 +25,15 @@
           = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
           = link_to "Log in", new_user_session_path
           = link_to "Sign up", new_user_registration_path
+    .row
+      .large-12.columns
+        %ul
+          = form_tag search_path, method: :get do
+            = autocomplete_field_tag 'q', '', autocomplete_book_searchable_terms_books_path, :size => 75, id: "search-bar"
+            = submit_tag "Go!", name: nil, id: "search-submit-tag"
 
-      = yield
+    .row
+      .large-12.columns
+        = yield
 
     = javascript_include_tag "application"
