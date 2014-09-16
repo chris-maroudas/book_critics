@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     if params[:q].nil?
       @books = []
     else
-      @books = Book.search(params[:q])
+      @books = Book.search(params[:q]).records
     end
   end
 
