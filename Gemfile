@@ -4,6 +4,7 @@ ruby '2.1.2'
 
 # Authentication
 gem 'devise'
+gem 'devise-async'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
