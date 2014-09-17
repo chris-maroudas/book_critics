@@ -15,7 +15,8 @@ class BooksController < ApplicationController
   def show
     @new_review = @book.reviews.new
     @related_books = @book.find_related_tags
-
+    @like = Like.where(book_id: @book.id, user_id: current_user.id).first
+    @like = @book.likes.new if @like.blank?
   end
 
   # GET /books/new

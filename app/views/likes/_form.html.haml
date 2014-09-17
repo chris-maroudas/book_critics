@@ -1,10 +1,8 @@
-- like = Like.where(book_id: @book.id, user_id: current_user.id).first
-- like = @book.likes.new if like.blank?
 
-- if like.new_record?
-  = simple_form_for like, remote: true do |f|
+- if @like.new_record?
+  = simple_form_for @like, remote: true do |f|
     = f.input :book_id, as: :hidden
     = f.submit "Love it!"
 - else
-  = simple_form_for like, method: :delete, remote: true do |f|
+  = simple_form_for @like, method: :delete, remote: true do |f|
     = f.submit "Unlove it!"

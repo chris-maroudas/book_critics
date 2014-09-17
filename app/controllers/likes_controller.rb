@@ -24,8 +24,9 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.destroy
+
         format.html { redirect_to @like.book, notice: "Unloved!" }
-        format.js {  }
+        format.js { @like = @book.likes.new } # Solves the problem
       else
         format.html { redirect_to @like.book, notice: "An error occured!" }
         format.js { }
