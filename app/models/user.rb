@@ -33,8 +33,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :async, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
 
-
   has_many :reviews
+  has_many :likes
+  has_many :liked_books, through: :likes, source: :book
+
+  # Methods
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -54,7 +57,5 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-
 
 end

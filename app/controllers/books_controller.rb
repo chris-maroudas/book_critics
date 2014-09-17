@@ -15,6 +15,7 @@ class BooksController < ApplicationController
   def show
     @new_review = @book.reviews.new
     @related_books = @book.find_related_tags
+
   end
 
   # GET /books/new

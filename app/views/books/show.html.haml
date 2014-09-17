@@ -14,7 +14,13 @@
 \|
 = link_to 'Back', books_path
 
+
 - if user_signed_in?
+
+
+  #like-forms
+    = render "likes/form", like: @like
+
   = simple_form_for([@book, @new_review]) do |f|
     = f.input :title
     = f.input :content

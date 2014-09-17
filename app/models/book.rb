@@ -36,7 +36,6 @@ class Book < ActiveRecord::Base
   # TODO: Should Accept nested attributes when an author doesn't exist
   # TODO: Elastic search and autocomplete search only approved books
   # TODO: Check gem choice for tags
-  # TODO: Add "Want to read" using redis(?)
   # TODO: Add methods to bring images from IMDB like in movie store
 
   acts_as_taggable
@@ -44,6 +43,8 @@ class Book < ActiveRecord::Base
   # Associations
   belongs_to :author
   has_many :reviews, dependent: :destroy
+  has_many :likes
+  has_many :fans, through: :likes, source: :user
 
   # Validations
   validates :author_id, presence: true
@@ -123,6 +124,10 @@ class Book < ActiveRecord::Base
         }
       }
     )
+  end
+
+  def to_s
+    title
   end
 
 end
