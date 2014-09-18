@@ -18,12 +18,18 @@
   Author.create(stats)
 end
 
-50.times do
-  stats = { author: Author.all.sample, title: Faker::Hacker.say_something_smart, content: Faker::Lorem.paragraph(5), approved: true }
+tags = []
+30.times do
+  tags << Faker::App.name
+end
+tags.uniq!
+
+200.times do
+  stats = { author: Author.all.sample, title: Faker::Hacker.say_something_smart, content: Faker::Lorem.paragraph(5), approved: true, list_of_tags: tags.sample(rand(2..4)).join(", ") }
   Book.create(stats)
 end
 
-3500.times do
+500.times do
   stats = { title: Faker::Hacker.say_something_smart, book: Book.all.sample, rating: rand(1..5), approved: true }
   Review.create(stats)
 end
