@@ -13,6 +13,7 @@ class Like < ActiveRecord::Base
 
   belongs_to :book
   belongs_to :user
+  # TODO: Add counter_cache: true to book
 
   validates_uniqueness_of :book_id, scope: :user_id
 end

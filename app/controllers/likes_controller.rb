@@ -7,7 +7,6 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(like_params)
-    @book = @like.book
     respond_to do |format|
       if @like.save
         format.html { redirect_to @like.book, notice: "Liked!" }
@@ -20,13 +19,14 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-    @book = @like.book
 
     respond_to do |format|
       if @like.destroy
-
         format.html { redirect_to @like.book, notice: "Unloved!" }
-        format.js { @like = @book.likes.new } # Solves the problem
+        format.js do
+          old_like = @like
+          @like = old_like.book.likes.new  # Solves the problem
+        end
       else
         format.html { redirect_to @like.book, notice: "An error occured!" }
         format.js { }
