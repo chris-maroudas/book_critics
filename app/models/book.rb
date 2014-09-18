@@ -16,12 +16,9 @@
 #  approved_reviews_count :integer
 #
 
-require 'elasticsearch/model'
 require 'babosa'
 
 class Book < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -43,14 +40,15 @@ class Book < ActiveRecord::Base
   # Associations
   belongs_to :author
   has_many :reviews, dependent: :destroy
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :fans, through: :likes, source: :user
+  has_one :search_data, dependent: :destroy
 
   # Validations
   validates :author_id, presence: true
 
   # Callbacks
-  before_create :add_searchable_terms
+  after_create :add_search_data
 
   # Scopes
   scope :approved, -> { where(approved: true) }
@@ -64,6 +62,16 @@ class Book < ActiveRecord::Base
 
 
   # Methods
+
+  def add_search_data
+    data = {
+      title: title,
+      author_name: author.full_name,
+      tags: list_of_tags.to_s
+    }
+    create_search_data(data)
+  end
+
   def reviewed?
     reviews.approved.present?
   end
@@ -98,39 +106,10 @@ class Book < ActiveRecord::Base
     title_changed?
   end
 
-  # Autocomplete and elastic search field
-  def add_searchable_terms
-    unless author.blank?
-      self.searchable_terms ||= "#{title}, #{author.first_name} #{author.last_name}"
-    end
-  end
 
-  # Elastic Search customization
-  def self.search(query)
-    __elasticsearch__.search(
-      {
-        query: {
-          multi_match: {
-            query: query,
-            fields: ['searchable_terms']
-          }
-        },
-        highlight: {
-          pre_tags: ['<em><strong>'],
-          post_tags: ['</em></strong>'],
-          fields: {
-            searchable_terms: {}
-          }
-        }
-      }
-    )
-  end
 
   def to_s
     title
   end
 
 end
-
-# Index all book  from the DB to Elasticsearch
-Book.import

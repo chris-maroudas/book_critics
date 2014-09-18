@@ -28,7 +28,7 @@
       .large-12.columns
         %ul
           = form_tag search_path, method: :get do
-            = autocomplete_field_tag 'q', '', autocomplete_book_searchable_terms_books_path, :size => 75, id: "search-bar"
+            = autocomplete_field_tag 'q', '', autocomplete_book_title_books_path, :size => 75, id: "search-bar"
             = submit_tag "Go!", name: nil, id: "search-submit-tag"
 
     .row
