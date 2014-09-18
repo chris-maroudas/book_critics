@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :async, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
 
   has_many :reviews
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liked_books, through: :likes, source: :book
 
   # Methods
