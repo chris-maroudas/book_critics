@@ -33,3 +33,20 @@ end
   stats = { title: Faker::Hacker.say_something_smart, book: Book.all.sample, rating: rand(1..5), approved: true }
   Review.create(stats)
 end
+
+
+100.times do
+  password = Faker::Internet.password(8)
+  stats = {
+    email: Faker::Internet.email,
+    password: password,
+    password_confirmation: password,
+    confirmation_token: nil,
+    confirmed_at: Time.now
+  }
+  User.create(stats)
+end
+
+Book.all.each do |book|
+  book.fans << User.all.sample(rand(2..10))
+end

@@ -32,8 +32,8 @@ class Book < ActiveRecord::Base
   # TODO: A normal user should apply to create an author
   # TODO: Should Accept nested attributes when an author doesn't exist
   # TODO: Elastic search and autocomplete search only approved books
-  # TODO: Check gem choice for tags
   # TODO: Add methods to bring images from IMDB like in movie store
+  # TODO: Add ISBN
 
   acts_as_taggable
 
