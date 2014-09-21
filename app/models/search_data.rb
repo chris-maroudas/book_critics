@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: search_data
+#
+#  id          :integer          not null, primary key
+#  book_id     :integer
+#  title       :string(255)
+#  author_name :string(255)
+#  tags        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 require 'elasticsearch/model'
 
 class SearchData < ActiveRecord::Base

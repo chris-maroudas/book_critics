@@ -13,6 +13,8 @@
 #  approved   :boolean          default(FALSE)
 #
 
+# OPTIMIZE: Store sum column in book model
+
 class Review < ActiveRecord::Base
 
   belongs_to :user
@@ -37,6 +39,5 @@ class Review < ActiveRecord::Base
       book.save
     end
   end
-
 
 end
