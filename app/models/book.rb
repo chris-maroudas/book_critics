@@ -89,7 +89,7 @@ class Book < ActiveRecord::Base
   end
 
   def calculate_average_rating
-    self.average_rating = (reviews.approved.pluck(:rating).sum.to_f / reviews.approved.count).round(2)
+    self.average_rating = (reviews.approved.pluck(:rating).sum.to_f / reviews.approved.count).round(1)
     save
   end
 
