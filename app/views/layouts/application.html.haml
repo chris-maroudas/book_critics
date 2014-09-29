@@ -31,7 +31,7 @@
             = autocomplete_field_tag 'q', '', autocomplete_book_title_books_path, :size => 75, id: "search-bar"
             = submit_tag "Go!", name: nil, id: "search-submit-tag"
 
-    .row
+    .row#main-content
       .large-12.columns
         = yield
 
