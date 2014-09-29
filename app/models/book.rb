@@ -14,6 +14,7 @@
 #  reviews_count          :integer
 #  approved               :boolean          default(FALSE)
 #  approved_reviews_count :integer
+#  category_id            :integer
 #
 
 require 'babosa'
@@ -22,7 +23,6 @@ class Book < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: :slugged
-
   # TODO:  Add skroutz API and get lower price
   # TODO: Add image and carrierwave
   # TODO: Active admin from Sitepoint
@@ -37,7 +37,6 @@ class Book < ActiveRecord::Base
   # TODO:  Book belongs_to category
   # FIXME: Should not accept a tag with another category name
   # FIXME:  Share fb, twitter
-  # OPTIMIZE: Floating point 1 on avg_rating
   # TODO: Quotes fade-in-out  below search center in home-page.
   # TODO: Most related, Highest rated in every category, Most kept
   # TODO: http://www.skroutz.gr/books/2678037.%CE%9A%CE%B1%CF%84%CE%AC-%CF%87%CF%81%CF%8C%CE%BD%CE%BF%CE%BD-%CE%B5%CF%85%CE%B1%CE%B3%CE%B3%CE%AD%CE%BB%CE%B9%CE%BF.html?keyphrase=%CE%BA%CE%B1%CF%84%CE%B1+%CF%87%CF%81%CE%BF%CE%BD%CE%BF%CE%BD+%CE%B5%CF%85%CE%B1%CE%B3%CE%B3%CE%B5%CE%BB%CE%B9%CE%BF
@@ -46,6 +45,7 @@ class Book < ActiveRecord::Base
   acts_as_taggable
 
   # Associations
+  belongs_to :category, counter_cache: true
   belongs_to :author
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -89,7 +89,7 @@ class Book < ActiveRecord::Base
   end
 
   def calculate_average_rating
-    self.average_rating = (reviews.approved.pluck(:rating).sum.to_f / reviews.approved.count).round(1)
+    self.average_rating = (reviews.approved.pluck(:rating).sum.to_f / reviews.approved.count).round()
     save
   end
 
